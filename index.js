@@ -56,7 +56,7 @@ function easyGridFS(db, driver) {
         }
 
         gfs.findOne({
-            _id:
+            _id: id
         }, function (err, file) {
             if (err) callback(err, null);
             else if (!file) callback('File not found.', null);
