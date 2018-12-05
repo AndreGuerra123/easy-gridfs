@@ -168,6 +168,7 @@ function easyGridFS(db, driver) {
         });
     };
 
+    return this;
 }
 
 module.exports = easyGridFS;
