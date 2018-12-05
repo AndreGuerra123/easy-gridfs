@@ -1,37 +1,32 @@
 {
-  "name": "gridfs-easy",
-  "version": "1.0.4",
-  "description": "store your pictures in mongodb easily",
+  "name": "easy-gridfs",
+  "version": "1.0.0",
+  "description": "Most simple driver for MongoDB GridFS",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "readme": "readme.md",
-  "dependencies": {
-    "async": "^2.6.0",
-    "connect-multiparty": "^2.1.0",
-    "file-system": "^2.2.2",
-    "gridfs-locking-stream": "^1.1.1",
-    "gridfs-stream": "^1.1.1",
-    "mongodb": "^3.0.4",
-    "mongoose": "^4.11.6",
-    "path": "^0.12.7"
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ghasemikasra39/gridfsEasy.git"
+    "url": "git+https://github.com/AndreGuerra123/easy-gridfs.git"
   },
   "keywords": [
-    "['mongodb'",
-    "'gridfs'",
-    "'mongoose'",
-    "'gridfs-stream'",
-    "'gridfs-locking-stream']"
+    "['GridFS'",
+    "MongoDB",
+    "'stream'",
+    "'file']"
   ],
-  "author": "Kasra Ghasemi",
+  "author": "Andre Guerra",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ghasemikasra39/gridfsEasy/issues"
+    "url": "https://github.com/AndreGuerra123/easy-gridfs/issues"
   },
-  "homepage": "https://github.com/ghasemikasra39/gridfsEasy#readme"
+  "homepage": "https://github.com/AndreGuerra123/easy-gridfs#readme",
+  "dependencies": {
+    "async": "^2.6.1",
+    "chai": "^4.2.0",
+    "fs-extra": "^7.0.1",
+    "gridfs-stream": "^1.1.1",
+    "mongodb": "^3.1.10"
+  }
 }
