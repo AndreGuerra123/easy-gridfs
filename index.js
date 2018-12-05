@@ -80,7 +80,6 @@ function easyGridFS(db, driver) {
             _id: id
         }, function (err, file) {
             if (err) callback(err, null);
-            else if (!file) callback('File not found.', null);
             else {
                 contentType = file.contentType
             }
