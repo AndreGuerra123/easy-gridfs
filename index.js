@@ -23,7 +23,7 @@ function validate_path(path) {
 
 function easyGridFS(db, driver) {
 
-    var gfs = grid(db, driver);
+    this.gfs = grid(db, driver);
 
     this.saveFile = function (path, name, callback) {
 
@@ -34,7 +34,7 @@ function easyGridFS(db, driver) {
             callback(err, null)
         }
 
-        gfs.createWriteStream({
+        this.gfs.createWriteStream({
                 filename: name
             },
             function (err, writestream) {
@@ -55,7 +55,7 @@ function easyGridFS(db, driver) {
             callback(err, null)
         }
 
-        gfs.findOne({
+        this.gfs.findOne({
             _id: id
         }, function (err, file) {
             if (err) callback(err, null);
@@ -76,7 +76,7 @@ function easyGridFS(db, driver) {
         let contentType = null;
         let data = [];
 
-        gfs.findOne({
+        this.gfs.findOne({
             _id: id
         }, function (err, file) {
             if (err) callback(err, null);
@@ -85,7 +85,7 @@ function easyGridFS(db, driver) {
                 contentType = file.contentType
             }
         })
-        gfs.createReadStream({
+        this.gfs.createReadStream({
             _id: id
         }, function (err, rs) {
             if (err) callback(err, null);
@@ -116,7 +116,7 @@ function easyGridFS(db, driver) {
 
         let data = [];
 
-        gfs.createReadStream({
+        this.gfs.createReadStream({
             _id: id
         }, function (err, rs) {
             if (err) callback(err, null);
@@ -144,7 +144,7 @@ function easyGridFS(db, driver) {
             callback(err, null)
         }
 
-        gfs.remove({
+        this.gfs.remove({
             _id: id
         }, function (err, result) {
             if (err) callback(err, null);
@@ -160,7 +160,7 @@ function easyGridFS(db, driver) {
             callback(err, null)
         }
 
-        gfs.exist({
+        this.gfs.exist({
             _id: id
         }, function (err, found) {
             if (err) callback(err, null);
