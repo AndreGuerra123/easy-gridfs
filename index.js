@@ -96,9 +96,6 @@ function easyGridFS(db, driver) {
                     data = Buffer.concat(data);
                     callback(null, 'data:' + contentType + ';base64,' + Buffer(data).toString('base64'));
                 });
-                rs.on('error', function (err) {
-                    callback(err, null);
-                });
             }
         });
 
