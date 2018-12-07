@@ -300,8 +300,11 @@ describe('easyGridFS', function () {
         })
     })
 
-    after(function () {
-        mongoose.connection.db.dropDatabase();
-    })
+    after(done => {
+        mongoose.models = {};
+        mongoose.modelSchemas = {};
+        mongoose.connection.close();
+        done();
+      });
 
 });
