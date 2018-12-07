@@ -24,13 +24,18 @@ easyGridFS.prototype.saveFile = async function (filepath, filename, callback) {
             mode: 'w',
             content_type: mime.lookup(filepath) || 'application/octet-stream'
         })
-        fs.createReadStream(filepath).pipe(ws);
         ws.on('close', function (file) {
             callback(null, file);
         });
         ws.on('error', function (err) {
             callback(err, null)
+        })  
+        var rs = fs.createReadStream(filepath)
+        rs.on('error', function (err) {
+            callback(err, null)
         })
+        rs.pipe(ws);
+          
     } catch (err) {
         callback(err, null);
     }

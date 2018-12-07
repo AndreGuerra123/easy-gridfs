@@ -38,6 +38,9 @@ describe('easyGridFS', function () {
         });
         it('.removeFile should be a function', function () {
             (typeof (egfs.removeFile)).should.equals('function')
+        });
+        it('.validateOBID should be a function', function () {
+            (typeof (egfs.validateOBID)).should.equals('function')
         })
     });
 
@@ -54,6 +57,7 @@ describe('easyGridFS', function () {
         egfs.saveFile(path, null, function (err, file) {
             should.not.exist(err)
             should.exist(file)
+            should.equal(file.name,'test.png')
             done()
         })
     });
@@ -61,6 +65,15 @@ describe('easyGridFS', function () {
     it('should fail to save a file without path', function (done) {
         var name = "test.png"
         egfs.saveFile(null, name, function (err, file) {
+            should.exist(err)
+            should.not.exist(file)
+            done()
+        })
+    });
+
+    it('should fail to save a file with non existing path', function (done) {
+        var path = "./test/nevergonnahappen/test.png"
+        egfs.saveFile(path, 'no_file', function (err, file) {
             should.exist(err)
             should.not.exist(file)
             done()
