@@ -57,7 +57,7 @@ describe('easyGridFS', function () {
         egfs.saveFile(path, null, function (err, file) {
             should.not.exist(err)
             should.exist(file)
-            should.equal(file.name,'test.png')
+            should.equal(file.filename,'test.png')
             done()
         })
     });
