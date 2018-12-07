@@ -9,7 +9,7 @@ let egfs;
 
 describe('easyGridFS', function () {
 
-    before(function (done) {
+    beforeAll(function (done) {
         mongoose.connect('mongodb://localhost:27017/test',{ useNewUrlParser: true }, function (error) {
             if (error) done(error);
             egfs = new easyGridFS(mongoose.connection.db, mongoose.mongo)
@@ -45,7 +45,7 @@ describe('easyGridFS', function () {
     });
 
     it('should save a file', function (done) {
-        egfs.saveFile('./test/test.png', 'named_test', function (err, file) {
+        egfs.saveFile('./spec/test.png', 'named_test', function (err, file) {
             should.not.exist(err)
             should.exist(file)
             done()
@@ -53,7 +53,7 @@ describe('easyGridFS', function () {
     });
 
     it('should save a file without name', function (done) {
-        var path = "./test/test.png"
+        var path = "./spec/test.png"
         egfs.saveFile(path, null, function (err, file) {
             should.not.exist(err)
             should.exist(file)
@@ -72,7 +72,7 @@ describe('easyGridFS', function () {
     });
 
     it('should fail to save a file with non existing path', function (done) {
-        var path = "./test/nevergonnahappen/test.png"
+        var path = "./spec/nevergonnahappen/test.png"
         egfs.saveFile(path, 'no_file', function (err, file) {
             should.exist(err)
             should.not.exist(file)
@@ -81,7 +81,7 @@ describe('easyGridFS', function () {
     });
 
     it('should get info of a existing file', function(done){
-        var path = "./test/test.png"
+        var path = "./spec/test.png"
         egfs.saveFile(path, null, function (err, file) {
             should.not.exist(err)
             should.exist(file)
@@ -121,7 +121,7 @@ describe('easyGridFS', function () {
     })
 
     it('should store the correct content type of file', function(done){
-        var path = "./test/test.png"
+        var path = "./spec/test.png"
         egfs.saveFile(path, null, function (err, file) {
             should.not.exist(err)
             should.exist(file)
@@ -135,7 +135,7 @@ describe('easyGridFS', function () {
     })
 
     it('should get data of a existing file', function(done){
-        var path = "./test/test.png"
+        var path = "./spec/test.png"
         egfs.saveFile(path, null, function (err, file) {
             should.not.exist(err)
             should.exist(file)
@@ -178,7 +178,7 @@ describe('easyGridFS', function () {
     })
 
     it('should get base64 of a existing file', function(done){
-        var path = "./test/test.png"
+        var path = "./spec/test.png"
         egfs.saveFile(path, null, function (err, file) {
             should.not.exist(err)
             should.exist(file)
@@ -221,7 +221,7 @@ describe('easyGridFS', function () {
     })
 
     it('should find existing file', function(done){
-        var path = "./test/test.png"
+        var path = "./spec/test.png"
         egfs.saveFile(path, null, function (err, file) {
             should.not.exist(err)
             should.exist(file)
@@ -261,7 +261,7 @@ describe('easyGridFS', function () {
     })
 
     it('should remove existing file', function(done){
-        var path = "./test/test.png"
+        var path = "./spec/test.png"
         egfs.saveFile(path, null, function (err, file) {
             should.not.exist(err)
             should.exist(file)
@@ -300,7 +300,7 @@ describe('easyGridFS', function () {
         })
     })
 
-    after(done => {
+    afterAll(done => {
         mongoose.models = {};
         mongoose.modelSchemas = {};
         mongoose.connection.close();

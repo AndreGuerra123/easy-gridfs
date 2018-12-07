@@ -1,10 +1,5 @@
 language: node_js
-sudo: required
 services: mongodb
-matrix:
-  include:
-    - node_js: "stable"
-      before_script:
-        - npm install -g mocha nyc coveralls mocha-lcov-reporter --save-dev
-      after_success:
-        - npm run coverage
+script:
+  - istanbul cover ./node_modules/jasmine/bin/jasmine.js
+  - codecov
