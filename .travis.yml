@@ -1,6 +1,9 @@
 language: node_js
-node_js:
-  - "7"
-after_success: npm run coverage
-services: mongodb
-
+sudo: required
+matrix:
+  include:
+    - node_js: "stable"
+      before_script:
+        - npm install -g mocha istanbul coveralls mocha-lcov-reporter --save-dev
+      after_success:
+        - npm run coveralls

@@ -1,7 +1,8 @@
-var grid = require('gridfs-stream');
 var fs = require('fs')
-var mime = require('mime-types')
 var path = require('path')
+
+var grid = require('gridfs-stream');
+var mime = require('mime-types')
 var OID = require("mongodb").ObjectID
 
 function easyGridFS(db, driver) {

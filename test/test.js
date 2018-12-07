@@ -302,7 +302,6 @@ describe('easyGridFS', function () {
 
     after(function () {
         mongoose.connection.db.dropDatabase();
-        mongoose.connection.close()
     })
 
 });
