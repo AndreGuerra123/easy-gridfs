@@ -7,7 +7,7 @@ var base64 = require('./base64.js')
 let egfs;
 
 
-describe('easyGridFS', function () {
+describe('easyGridFS  mongoose', function () {
 
     beforeAll(function (done) {
         mongoose.connect('mongodb://localhost:27017/test',{ useNewUrlParser: true }, function (error) {
@@ -16,6 +16,16 @@ describe('easyGridFS', function () {
             done()
         });
     });
+
+/*     beforeAll(function (done) {
+        // Use connect method to connect to the server
+        mongodb.MongoClient.connect('mongodb://localhost:27017', function (err, client) {
+            if (err) done(err)
+            db = client.db('test');
+            egfs = new easyGridFS(db, mongodb)
+            done();
+        });
+    }); */
     describe('meta', function () {
         it('should generate a valid easy-gridfs driver instance', function () {
             should.exist(egfs, 'Easy-gridfs object instance does not exist.')
@@ -306,5 +316,13 @@ describe('easyGridFS', function () {
         mongoose.connection.close();
         done();
       });
+
+     /*  afterAll(done => {
+        db.dropDatabase((err)=>{
+            if(err) done(err)
+            else db.close(done)
+        })
+        
+    }); */
 
 });

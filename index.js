@@ -113,6 +113,22 @@ easyGridFS.prototype.getFileBase64 = async function (id, callback) {
     }
 };
 
+easyGridFS.prototype.pipe = function(id,response){
+    try {
+        var _id = this.validateOBID(id)
+        var rs = this.gfs.createReadStream({
+            _id
+        })
+        rs.pipe(response)
+        rs.on('error', function (err) {
+            response.status(404).json(err)
+        })
+    } catch (err) {
+        response.status(404).json(err)
+    }
+}
+
+
 easyGridFS.prototype.removeFile = function (id, callback) {
     try {
         var _id = this.validateOBID(id)
