@@ -9,7 +9,8 @@ let db;
 let egfs;
 
 
-describe('easyGridFS mongodb', function () {
+describe('easyGridFS  mongoose', function () {
+
 
     beforeAll(function (done) {
         // Use connect method to connect to the server
@@ -44,9 +45,6 @@ describe('easyGridFS mongodb', function () {
         it('.removeFile should be a function', function () {
             (typeof (egfs.removeFile)).should.equals('function')
         });
-        it('.validateOBID should be a function', function () {
-            (typeof (egfs.validateOBID)).should.equals('function')
-        })
     });
 
     it('should save a file', function (done) {
@@ -62,7 +60,7 @@ describe('easyGridFS mongodb', function () {
         egfs.saveFile(path, null, function (err, file) {
             should.not.exist(err)
             should.exist(file)
-            should.equal(file.filename, 'test.png')
+            should.equal(file.filename,'test.png')
             done()
         })
     });
@@ -85,12 +83,12 @@ describe('easyGridFS mongodb', function () {
         })
     });
 
-    it('should get info of a existing file', function (done) {
+    it('should get info of a existing file', function(done){
         var path = "./spec/test.png"
         egfs.saveFile(path, null, function (err, file) {
             should.not.exist(err)
             should.exist(file)
-            egfs.getFileInfo(file._id, function (err2, info) {
+            egfs.getFileInfo(file._id,function(err2,info){
                 should.not.exist(err2)
                 should.exist(info)
                 done()
@@ -98,39 +96,39 @@ describe('easyGridFS mongodb', function () {
         })
     })
 
-    it('should fail to get the info of non existing file id', function (done) {
+    it('should fail to get the info of non existing file id', function(done){
         var nonexistent = '551137c2f9e1fac808a5f572'
-        egfs.getFileInfo(nonexistent, function (err2, info) {
+        egfs.getFileInfo(nonexistent,function(err2,info){
             should.exist(err2)
             should.not.exist(info)
             done()
         })
     })
 
-    it('should fail to get the info of invalid file id', function (done) {
+    it('should fail to get the info of invalid file id', function(done){
         var nonexistent = 'abc'
-        egfs.getFileInfo(nonexistent, function (err2, info) {
+        egfs.getFileInfo(nonexistent,function(err2,info){
             should.exist(err2)
             should.not.exist(info)
             done()
         })
     })
 
-    it('should fail to get the info of undefined file id', function (done) {
+    it('should fail to get the info of undefined file id', function(done){
         var nonexistent = null
-        egfs.getFileInfo(nonexistent, function (err2, info) {
+        egfs.getFileInfo(nonexistent,function(err2,info){
             should.exist(err2)
             should.not.exist(info)
             done()
         })
     })
 
-    it('should store the correct content type of file', function (done) {
+    it('should store the correct content type of file', function(done){
         var path = "./spec/test.png"
         egfs.saveFile(path, null, function (err, file) {
             should.not.exist(err)
             should.exist(file)
-            egfs.getFileInfo(file._id, function (err2, info) {
+            egfs.getFileInfo(file._id,function(err2,info){
                 should.not.exist(err2)
                 should.exist(info)
                 info.contentType.should.equal('image/png')
@@ -139,12 +137,12 @@ describe('easyGridFS mongodb', function () {
         })
     })
 
-    it('should get data of a existing file', function (done) {
+    it('should get data of a existing file', function(done){
         var path = "./spec/test.png"
         egfs.saveFile(path, null, function (err, file) {
             should.not.exist(err)
             should.exist(file)
-            egfs.getFileData(file._id, function (err2, data) {
+            egfs.getFileData(file._id,function(err2,data){
                 should.not.exist(err2)
                 should.exist(data)
                 data.should.startWith('data')
@@ -155,39 +153,39 @@ describe('easyGridFS mongodb', function () {
         })
     })
 
-    it('should fail to get the data of non existing file id', function (done) {
+    it('should fail to get the data of non existing file id', function(done){
         var nonexistent = '551137c2f9e1fac808a5f572'
-        egfs.getFileInfo(nonexistent, function (err, data) {
+        egfs.getFileInfo(nonexistent,function(err,data){
             should.exist(err)
             should.not.exist(data)
             done()
         })
     })
 
-    it('should fail to get the data of invalid file id', function (done) {
+    it('should fail to get the data of invalid file id', function(done){
         var nonexistent = 'abc'
-        egfs.getFileInfo(nonexistent, function (err, data) {
+        egfs.getFileInfo(nonexistent,function(err,data){
             should.exist(err)
             should.not.exist(data)
             done()
         })
     })
 
-    it('should fail to get the data of undefined file id', function (done) {
+    it('should fail to get the data of undefined file id', function(done){
         var nonexistent = null
-        egfs.getFileInfo(nonexistent, function (err, data) {
+        egfs.getFileInfo(nonexistent,function(err,data){
             should.exist(err)
             should.not.exist(data)
             done()
         })
     })
 
-    it('should get base64 of a existing file', function (done) {
+    it('should get base64 of a existing file', function(done){
         var path = "./spec/test.png"
         egfs.saveFile(path, null, function (err, file) {
             should.not.exist(err)
             should.exist(file)
-            egfs.getFileBase64(file._id, function (err2, data) {
+            egfs.getFileBase64(file._id,function(err2,data){
                 should.not.exist(err2)
                 should.exist(data)
                 data.should.not.startWith('data')
@@ -198,113 +196,108 @@ describe('easyGridFS mongodb', function () {
         })
     })
 
-    it('should fail to get the base64 of non existing file id', function (done) {
+    it('should fail to get the base64 of non existing file id', function(done){
         var nonexistent = '551137c2f9e1fac808a5f572'
-        egfs.getFileBase64(nonexistent, function (err, data) {
+        egfs.getFileBase64(nonexistent,function(err,data){
             should.exist(err)
             should.not.exist(data)
             done()
         })
     })
 
-    it('should fail to get the base64 of invalid file id', function (done) {
+    it('should fail to get the base64 of invalid file id', function(done){
         var nonexistent = 'abc'
-        egfs.getFileBase64(nonexistent, function (err, data) {
+        egfs.getFileBase64(nonexistent,function(err,data){
             should.exist(err)
             should.not.exist(data)
             done()
         })
     })
 
-    it('should fail to get the base64 of undefined file id', function (done) {
+    it('should fail to get the base64 of undefined file id', function(done){
         var nonexistent = null
-        egfs.getFileBase64(nonexistent, function (err, data) {
+        egfs.getFileBase64(nonexistent,function(err,data){
             should.exist(err)
             should.not.exist(data)
             done()
         })
     })
 
-    it('should find existing file', function (done) {
+    it('should find existing file', function(done){
         var path = "./spec/test.png"
         egfs.saveFile(path, null, function (err, file) {
             should.not.exist(err)
             should.exist(file)
-            egfs.existFile(file._id, function (err2, found) {
+            egfs.existFile(file._id,function(err2,found){
                 should.not.exist(err2)
-                should.equal(found, true)
+                should.equal(found,true)
                 done()
             })
         })
     })
 
-    it('should not find non existing file id', function (done) {
+    it('should not find non existing file id', function(done){
         var nonexistent = '551137c2f9e1fac808a5f572' //this is valid should say not found
-        egfs.existFile(nonexistent, function (err, found) {
+        egfs.existFile(nonexistent,function(err,found){
             should.not.exist(err)
-            should.equal(found, false)
+            should.equal(found,false)
             done()
         })
     })
-
-    it('should throw on finding invalid file id', function (done) {
-        var nonexistent = 'abcd' //this is invalid, should throw
-        egfs.existFile(nonexistent, function (err, found) {
-            should.exist(err)
-            should.not.exist(found)
+    it('should not find invalid file id', function(done){
+        var nonexistent = 'abcd' 
+        egfs.existFile(nonexistent,function(err,found){
+            should.not.exist(err)
+            should.equal(found,false)
             done()
         })
     })
-
-    it('should throw on finding undefined file id', function (done) {
-        var nonexistent = undefined //this is invalid, should throw
-        egfs.existFile(nonexistent, function (err, found) {
-            should.exist(err)
-            should.not.exist(found)
+    it('should throw on finding undefined file id', function(done){
+        var nonexistent = undefined 
+        egfs.existFile(nonexistent,function(err,found){
+            should.not.exist(err)
+            should.equal(found,false)
             done()
         })
     })
-
-    it('should remove existing file', function (done) {
+    it('should remove existing file', function(done){
         var path = "./spec/test.png"
         egfs.saveFile(path, null, function (err, file) {
             should.not.exist(err)
             should.exist(file)
-            egfs.removeFile(file._id, function (err2) {
+            egfs.removeFile(file._id,function(err2){
                 should.not.exist(err2)
-                egfs.existFile(file._id, function (err3, found) {
+                egfs.existFile(file._id,function(err3,found){
                     should.not.exist(err3)
-                    should.equal(found, false)
+                    should.equal(found,false)
                     done()
                 })
             })
         })
     })
 
-    it('should not throw on removing non existing file id', function (done) {
+    it('should not throw on removing non existing file id', function(done){
         var nonexistent = '551137c2f9e1fac808a5f572'
-        egfs.removeFile(nonexistent, function (err) {
+        egfs.removeFile(nonexistent,function(err){
+            should.not.exist(err)
+            done()
+        })
+    })
+    it('should throw on removing invalid file id', function(done){
+        var nonexistent = 'abc'
+        egfs.removeFile(nonexistent,function(err){
             should.not.exist(err)
             done()
         })
     })
 
-    it('should throw on removing invalid file id', function (done) {
-        var nonexistent = 'abc'
-        egfs.removeFile(nonexistent, function (err) {
+    it('should throw on removing undefined file id', function(done){
+        var nonexistent = null //This one actually errors but in the logic here applied shouldn't.
+        egfs.removeFile(nonexistent,function(err){
             should.exist(err)
             done()
         })
     })
-
-    it('should throw on removing undefined file id', function (done) {
-        var nonexistent = null
-        egfs.removeFile(nonexistent, function (err) {
-            should.exist(err)
-            done()
-        })
-    })
-
     afterAll(done => {
         db.dropDatabase((err)=>{
             if(err) done(err)

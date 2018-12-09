@@ -3,17 +3,10 @@ var path = require('path')
 
 var grid = require('gridfs-stream');
 var mime = require('mime-types')
-var val = require('validator')
-var assert = require('assert')
 
 function easyGridFS(db, driver) {
     this.gfs = grid(db, driver);
     return this;
-}
-
-easyGridFS.prototype.validateOBID = function(id){
-        assert(val.isMongoId(id.toString()),id.toString()+' is not a valid ObjectId.')
-        return id.toString()
 }
 
 easyGridFS.prototype.saveFile = async function (filepath, filename, callback) {
@@ -39,9 +32,8 @@ easyGridFS.prototype.saveFile = async function (filepath, filename, callback) {
         callback(err, null);
     }
 };
-easyGridFS.prototype.getFileInfo = function (id, callback) {
+easyGridFS.prototype.getFileInfo = function (_id, callback) {
     try {
-        var _id = this.validateOBID(id)
         this.gfs.findOne({
             _id
         }, function (err, file) {
@@ -55,10 +47,9 @@ easyGridFS.prototype.getFileInfo = function (id, callback) {
 
 };
 
-easyGridFS.prototype.getFileData = async function (id, callback) {
+easyGridFS.prototype.getFileData = async function (_id, callback) {
    
     try {
-        var _id = this.validateOBID(id)
         let file;
         let data = [];
         await this.gfs.findOne({
@@ -88,11 +79,10 @@ easyGridFS.prototype.getFileData = async function (id, callback) {
     }
 };
 
-easyGridFS.prototype.getFileBase64 = async function (id, callback) {
+easyGridFS.prototype.getFileBase64 = async function (_id, callback) {
     
     try {
         let data = [];
-        var _id = this.validateOBID(id)
         var rs = this.gfs.createReadStream({
             _id
         })
@@ -111,9 +101,8 @@ easyGridFS.prototype.getFileBase64 = async function (id, callback) {
     }
 };
 
-easyGridFS.prototype.pipe = function(id,response){
+easyGridFS.prototype.pipe = function(_id,response){
     try {
-        var _id = this.validateOBID(id)
         var rs = this.gfs.createReadStream({
             _id
         })
@@ -127,9 +116,8 @@ easyGridFS.prototype.pipe = function(id,response){
 }
 
 
-easyGridFS.prototype.removeFile = function (id, callback) {
+easyGridFS.prototype.removeFile = function (_id, callback) {
     try {
-        var _id = this.validateOBID(id)
         this.gfs.remove({
             _id
         }, function (err, _gs) {
@@ -141,9 +129,8 @@ easyGridFS.prototype.removeFile = function (id, callback) {
     }
 };
 
-easyGridFS.prototype.existFile = function (id, callback) {
+easyGridFS.prototype.existFile = function (_id, callback) {
     try {
-        _id = this.validateOBID(id)
         this.gfs.exist({
            _id
         }, function (err, found) {

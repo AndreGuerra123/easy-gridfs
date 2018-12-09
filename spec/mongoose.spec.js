@@ -49,9 +49,6 @@ describe('easyGridFS  mongoose', function () {
         it('.removeFile should be a function', function () {
             (typeof (egfs.removeFile)).should.equals('function')
         });
-        it('.validateOBID should be a function', function () {
-            (typeof (egfs.validateOBID)).should.equals('function')
-        })
     });
 
     it('should save a file', function (done) {
@@ -251,25 +248,22 @@ describe('easyGridFS  mongoose', function () {
             done()
         })
     })
-
-    it('should throw on finding invalid file id', function(done){
-        var nonexistent = 'abcd' //this is invalid, should throw
+    it('should not find invalid file id', function(done){
+        var nonexistent = 'abcd' 
         egfs.existFile(nonexistent,function(err,found){
-            should.exist(err)
-            should.not.exist(found)
+            should.not.exist(err)
+            should.equal(found,false)
             done()
         })
     })
-
     it('should throw on finding undefined file id', function(done){
-        var nonexistent = undefined //this is invalid, should throw
+        var nonexistent = undefined 
         egfs.existFile(nonexistent,function(err,found){
-            should.exist(err)
-            should.not.exist(found)
+            should.not.exist(err)
+            should.equal(found,false)
             done()
         })
     })
-
     it('should remove existing file', function(done){
         var path = "./spec/test.png"
         egfs.saveFile(path, null, function (err, file) {
@@ -293,17 +287,16 @@ describe('easyGridFS  mongoose', function () {
             done()
         })
     })
-
     it('should throw on removing invalid file id', function(done){
         var nonexistent = 'abc'
         egfs.removeFile(nonexistent,function(err){
-            should.exist(err)
+            should.not.exist(err)
             done()
         })
     })
 
     it('should throw on removing undefined file id', function(done){
-        var nonexistent = null
+        var nonexistent = null //This one actually errors but in the logic here applied shouldn't.
         egfs.removeFile(nonexistent,function(err){
             should.exist(err)
             done()

@@ -24,8 +24,7 @@
   "homepage": "https://github.com/AndreGuerra123/easy-gridfs#readme",
   "dependencies": {
     "gridfs-stream": "github:AndreGuerra123/gridfs-stream",
-    "mime-types": "^2.1.21",
-    "validator": "^10.9.0"
+    "mime-types": "^2.1.21"
   },
   "devDependencies": {
     "chai": "^4.2.0",
