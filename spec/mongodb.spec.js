@@ -4,6 +4,7 @@ var should = chai.should()
 var easyGridFS = require('../index.js');
 var mongodb = require('mongodb')
 var base64 = require('./base64.js')
+let mc;
 let db;
 let egfs;
 
@@ -14,7 +15,8 @@ describe('easyGridFS mongodb', function () {
         // Use connect method to connect to the server
         mongodb.MongoClient.connect('mongodb://localhost:27017', function (err, client) {
             if (err) done(err)
-            db = client.db('test');
+            mc = client;
+            db = mc.db('test');
             egfs = new easyGridFS(db, mongodb)
             done();
         });
@@ -306,7 +308,7 @@ describe('easyGridFS mongodb', function () {
     afterAll(done => {
         db.dropDatabase((err)=>{
             if(err) done(err)
-            else db.close(done)
+            else mc.close(done)
         })
         
     });

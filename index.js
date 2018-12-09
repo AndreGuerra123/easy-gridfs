@@ -3,7 +3,8 @@ var path = require('path')
 
 var grid = require('gridfs-stream');
 var mime = require('mime-types')
-var OID = require("mongodb").ObjectID
+var val = require('validator')
+var assert = require('assert')
 
 function easyGridFS(db, driver) {
     this.gfs = grid(db, driver);
@@ -11,11 +12,8 @@ function easyGridFS(db, driver) {
 }
 
 easyGridFS.prototype.validateOBID = function(id){
-        if(OID.isValid(id.toString())){
-            return id.toString()
-        }else{
-            throw new Error(id.toString()+' is not a valid ObjectId.')
-        }
+        assert(val.isMongoId(id.toString()),id.toString()+' is not a valid ObjectId.')
+        return id.toString()
 }
 
 easyGridFS.prototype.saveFile = async function (filepath, filename, callback) {
