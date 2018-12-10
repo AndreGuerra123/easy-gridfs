@@ -101,17 +101,18 @@ easyGridFS.prototype.getFileBase64 = async function (_id, callback) {
     }
 };
 
-easyGridFS.prototype.pipe = function(_id,response){
+easyGridFS.prototype.pipe = function(_id,res,done){
     try {
         var rs = this.gfs.createReadStream({
             _id
         })
-        rs.pipe(response)
+        rs.pipe(res)
         rs.on('error', function (err) {
-            response.status(404).json(err)
+            done(err)
         })
+        rs.on('end', done)
     } catch (err) {
-        response.status(404).json(err)
+        done(err)
     }
 }
 
