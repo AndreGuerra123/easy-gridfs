@@ -105,7 +105,7 @@ easyGridFS.prototype.getJSON = async function (_id, callback) {
     });
     rs.on('end', function () {
         data = Buffer.concat(data);
-        callback(null, Buffer.from(data).toJSON());
+        callback(null, JSON.parse(Buffer.from(data)));
     });
     rs.on('error', function (err) {
         callback(err, null)
