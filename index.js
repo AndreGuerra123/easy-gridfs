@@ -93,7 +93,7 @@ easyGridFS.prototype.getFileBase64 = async function (_id, callback) {
     
 };
 
-easyGridFS.prototype.getFileJSON = async function (_id, callback) {
+easyGridFS.prototype.getJSON = async function (_id, callback) {
 
  
     let data = [];
