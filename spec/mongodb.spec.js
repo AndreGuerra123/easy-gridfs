@@ -9,7 +9,7 @@ let db;
 let egfs;
 
 
-describe('easyGridFS  mongoose', function () {
+describe('easyGridFS  mongo', function () {
 
 
     beforeAll(function (done) {
